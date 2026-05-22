@@ -1,15 +1,1 @@
-# IDE files
-.idea/
-*.iml
-.DS_Store
-
-# Build outputs
-build/
-.gradle/
-/local.properties
-*.apk
-*.aab
-
-# Gradle wrapper (оставляем gradlew и gradlew.bat, остальное игнорим)
-gradle/wrapper/gradle-wrapper.jar
-!gradle/wrapper/gradle-wrapper.jar
+/build/
