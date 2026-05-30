@@ -8,7 +8,7 @@ class CartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val textView = TextView(this)
-        textView.text = "Корзина"
+        textView.text = "Корзина пока пуста"
         textView.textSize = 24f
         setContentView(textView)
     }
