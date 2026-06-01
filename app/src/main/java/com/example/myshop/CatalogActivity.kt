@@ -43,6 +43,8 @@ class CatalogActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = CatalogAdapter(emptyList()) { product ->
             // TODO: следующий блок — детали товара (Блок 3)
+            val bottomSheet = ProductBottomSheet.newInstance(product)
+            bottomSheet.show(supportFragmentManager, "product_bottom_sheet")
         }
         recyclerView.adapter = adapter
 
@@ -82,10 +84,8 @@ class CatalogActivity : AppCompatActivity() {
 
         // ==================== ПОДПИСКА НА ТОВАРЫ ====================
         viewModel.filteredProducts.observe(this) { products ->
-            adapter = CatalogAdapter(emptyList()) { product ->
-                val bottomSheet = ProductBottomSheet.newInstance(product)
-                bottomSheet.show(supportFragmentManager, "product_bottom_sheet")
-            }
+            println("DEBUG: Activity получила ${products.size} товаров")
+            adapter.updateProducts(products)
 
         }
     }

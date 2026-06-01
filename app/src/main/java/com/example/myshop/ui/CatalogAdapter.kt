@@ -29,6 +29,7 @@ class CatalogAdapter(
     override fun getItemCount() = products.size
 
     fun updateProducts(newProducts: List<Product>) {
+        println("DEBUG: адаптер обновлён, товаров = ${newProducts.size}")
         products = newProducts
         notifyDataSetChanged()
     }
