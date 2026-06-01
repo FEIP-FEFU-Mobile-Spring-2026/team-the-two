@@ -11,6 +11,8 @@ import com.example.myshop.ui.CatalogAdapter
 import com.example.myshop.viewmodel.CatalogViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
+import com.example.myshop.ProductBottomSheet
+
 
 class CatalogActivity : AppCompatActivity() {
 
@@ -80,7 +82,11 @@ class CatalogActivity : AppCompatActivity() {
 
         // ==================== ПОДПИСКА НА ТОВАРЫ ====================
         viewModel.filteredProducts.observe(this) { products ->
-            adapter.updateProducts(products)
+            adapter = CatalogAdapter(emptyList()) { product ->
+                val bottomSheet = ProductBottomSheet.newInstance(product)
+                bottomSheet.show(supportFragmentManager, "product_bottom_sheet")
+            }
+
         }
     }
 }
