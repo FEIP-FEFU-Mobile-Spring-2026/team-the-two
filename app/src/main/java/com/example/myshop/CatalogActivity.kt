@@ -46,6 +46,7 @@ class CatalogActivity : AppCompatActivity() {
 
         // ==================== ТАБЫ (категории) ====================
         viewModel.categories.observe(this) { categories ->
+            tabLayout.removeAllTabs()  // ← добавить эту строку
             categories.forEach { categoryName ->
                 tabLayout.addTab(tabLayout.newTab().setText(categoryName))
             }
