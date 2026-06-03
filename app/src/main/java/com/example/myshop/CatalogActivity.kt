@@ -11,6 +11,8 @@ import com.example.myshop.ui.CatalogAdapter
 import com.example.myshop.viewmodel.CatalogViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
+import com.example.myshop.ProductBottomSheet
+
 
 class CatalogActivity : AppCompatActivity() {
 
@@ -41,6 +43,8 @@ class CatalogActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = CatalogAdapter(emptyList()) { product ->
             // TODO: следующий блок — детали товара (Блок 3)
+            val bottomSheet = ProductBottomSheet.newInstance(product)
+            bottomSheet.show(supportFragmentManager, "product_bottom_sheet")
         }
         recyclerView.adapter = adapter
 
@@ -80,7 +84,9 @@ class CatalogActivity : AppCompatActivity() {
 
         // ==================== ПОДПИСКА НА ТОВАРЫ ====================
         viewModel.filteredProducts.observe(this) { products ->
+            println("DEBUG: Activity получила ${products.size} товаров")
             adapter.updateProducts(products)
+
         }
     }
 }

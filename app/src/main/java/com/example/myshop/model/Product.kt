@@ -14,5 +14,5 @@ data class Product(
     val weight: String,
     val season: String,
     val countryOfOrigin: String
-)
+) : java.io.Serializable
 

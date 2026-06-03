@@ -31,6 +31,7 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
     private fun loadData() {
         viewModelScope.launch {
             val productsList = repository.loadProducts()
+            println("DEBUG: Загружено товаров = ${productsList.size}")
             allProducts = productsList
             _products.value = productsList
 
@@ -39,6 +40,7 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
                 categoriesList.add(category.name)
             }
             _categories.value = categoriesList
+            println("DEBUG: Загружено категорий = ${categoriesList.size}")
 
             _selectedCategory.value = categoriesList[0]
             filterProducts(categoriesList[0])
@@ -57,6 +59,7 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
             val categoryId = repository.loadCategories().find { it.name == categoryName }?.id
             allProducts.filter { it.categoryId == categoryId }
         }
+        println("DEBUG: отфильтровано товаров = ${filtered.size} для категории $categoryName")
         _filteredProducts.value = filtered
     }
 }
