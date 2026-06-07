@@ -12,6 +12,7 @@ import com.example.myshop.viewmodel.CatalogViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.example.myshop.ProductBottomSheet
+import android.widget.Toast
 
 
 class CatalogActivity : AppCompatActivity() {
@@ -33,6 +34,23 @@ class CatalogActivity : AppCompatActivity() {
                 return CatalogViewModel(repository) as T
             }
         })[CatalogViewModel::class.java]
+
+        // Обработка ошибок
+        viewModel.errorMessage.observe(this) { error ->
+            if (error != null) {
+                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+            }
+        }
+
+// Индикатор загрузки (опционально)
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                // можно показать ProgressBar, но для начала просто лог
+                println("DEBUG: загрузка...")
+            } else {
+                println("DEBUG: загрузка завершена")
+            }
+        }
 
         // Находим элементы на экране
         recyclerView = findViewById(R.id.recyclerView)

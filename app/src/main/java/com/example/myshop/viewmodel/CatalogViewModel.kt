@@ -10,6 +10,12 @@ import kotlinx.coroutines.launch
 
 class CatalogViewModel(private val repository: ProductsRepository) : ViewModel() {
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
 
@@ -29,21 +35,27 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
     }
 
     private fun loadData() {
+        _isLoading.value = true
+        _errorMessage.value = null
         viewModelScope.launch {
-            val productsList = repository.loadProducts()
-            println("DEBUG: Загружено товаров = ${productsList.size}")
-            allProducts = productsList
-            _products.value = productsList
+            try {
+                val productsList = repository.loadProducts()
+                allProducts = productsList
 
-            val categoriesList = mutableListOf("Новинки")
-            repository.loadCategories().forEach { category ->
-                categoriesList.add(category.name)
+                val categoriesList = repository.loadCategories()
+                categoryIdMap = categoriesList.associate { it.name to it.id }
+                allCategoryNames = listOf("Новинки") + categoriesList.map { it.name }
+                _categories.value = allCategoryNames
+
+                _selectedCategory.value = allCategoryNames[0]
+                filterProducts(allCategoryNames[0])
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.value = "Ошибка загрузки данных. Проверьте интернет."
+                _filteredProducts.value = emptyList()
+            } finally {
+                _isLoading.value = false
             }
-            _categories.value = categoriesList
-            println("DEBUG: Загружено категорий = ${categoriesList.size}")
-
-            _selectedCategory.value = categoriesList[0]
-            filterProducts(categoriesList[0])
         }
     }
 
@@ -61,5 +73,8 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
         }
         println("DEBUG: отфильтровано товаров = ${filtered.size} для категории $categoryName")
         _filteredProducts.value = filtered
+    }
+    fun retryLoad() {
+        loadData()
     }
 }
