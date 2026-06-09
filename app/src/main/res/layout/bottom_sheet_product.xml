@@ -45,7 +45,7 @@
                 android:id="@+id/productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textColor="@color/price_color"/>
 
         </LinearLayout>
@@ -121,11 +121,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="8dp">
 
             <Button
                 android:id="@+id/addToCartButton"
-                android:layout_width="0dp"
+                android:layout_width="343dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="В корзину"
@@ -135,8 +135,8 @@
 
             <ImageButton
                 android:id="@+id/infoButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_info_details"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="@color/button_bg" /> //Должно работать корректно под Android 7 и выше
