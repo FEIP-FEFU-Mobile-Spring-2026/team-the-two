@@ -16,7 +16,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@android:color/black">
+            android:background="@color/bottom_sheet_bg">
 
             <ImageView
                 android:id="@+id/productImage"
@@ -53,7 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/price_color"/>
 
         </LinearLayout>
 
@@ -128,14 +129,17 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="В корзину"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/button_bg"
+                android:textColor="@color/button_text"/>
 
             <ImageButton
                 android:id="@+id/infoButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@android:drawable/ic_menu_info_details"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/button_bg" /> //Должно работать корректно под Android 7 и выше
 
         </LinearLayout>
 

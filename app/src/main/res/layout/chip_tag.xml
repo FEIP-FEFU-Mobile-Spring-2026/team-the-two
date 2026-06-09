@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
-    app:chipBackgroundColor="@android:color/white"
-    app:chipStrokeColor="@android:color/darker_gray"
-    app:chipStrokeWidth="1dp" />
+    app:chipBackgroundColor="@color/chip_bg"
+    app:chipStrokeColor="@color/chip_stroke"
+    app:chipStrokeWidth="1dp"
+    android:textColor="@color/chip_text"/>

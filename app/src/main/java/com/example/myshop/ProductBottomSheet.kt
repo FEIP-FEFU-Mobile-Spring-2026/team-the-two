@@ -1,6 +1,7 @@
 package com.example.myshop
 
 import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.myshop.model.Product
@@ -134,6 +136,31 @@ class ProductBottomSheet : BottomSheetDialogFragment() {
                 }
             }
             sizesContainer.addView(button)
+        }
+
+        val button = Button(requireContext()).apply {
+            text = size.name
+            backgroundTintList = ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_selected),
+                    intArrayOf()
+                ),
+                intArrayOf(
+                    ContextCompat.getColor(context, R.color.size_button_selected_bg),
+                    ContextCompat.getColor(context, R.color.size_button_bg)
+                )
+            )
+
+            setTextColor(ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_selected),
+                    intArrayOf()
+                ),
+                intArrayOf(
+                    ContextCompat.getColor(context, R.color.size_button_selected_text),
+                    ContextCompat.getColor(context, R.color.size_button_text)
+                )
+            ))
         }
     }
 
