@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -134,33 +135,29 @@ class ProductBottomSheet : BottomSheetDialogFragment() {
                     }
                     isSelected = true
                 }
+                backgroundTintList = ColorStateList(
+                    arrayOf(
+                        intArrayOf(android.R.attr.state_selected),
+                        intArrayOf()
+                    ),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.size_button_selected_bg),
+                        ContextCompat.getColor(context, R.color.size_button_bg)
+                    )
+                )
+
+                setTextColor(ColorStateList(
+                    arrayOf(
+                        intArrayOf(android.R.attr.state_selected),
+                        intArrayOf()
+                    ),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.size_button_selected_text),
+                        ContextCompat.getColor(context, R.color.size_button_text)
+                    )
+                ))
             }
             sizesContainer.addView(button)
-        }
-
-        val button = Button(requireContext()).apply {
-            text = size.name
-            backgroundTintList = ColorStateList(
-                arrayOf(
-                    intArrayOf(android.R.attr.state_selected),
-                    intArrayOf()
-                ),
-                intArrayOf(
-                    ContextCompat.getColor(context, R.color.size_button_selected_bg),
-                    ContextCompat.getColor(context, R.color.size_button_bg)
-                )
-            )
-
-            setTextColor(ColorStateList(
-                arrayOf(
-                    intArrayOf(android.R.attr.state_selected),
-                    intArrayOf()
-                ),
-                intArrayOf(
-                    ContextCompat.getColor(context, R.color.size_button_selected_text),
-                    ContextCompat.getColor(context, R.color.size_button_text)
-                )
-            ))
         }
     }
 

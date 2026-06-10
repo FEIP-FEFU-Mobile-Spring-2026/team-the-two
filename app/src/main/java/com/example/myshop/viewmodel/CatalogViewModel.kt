@@ -30,6 +30,10 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
 
     private var allProducts = listOf<Product>()
 
+//    Существование этих двух ↓ сомнительно
+    private var categoryIdMap = mapOf<String, String>()
+    private var allCategoryNames = listOf<String>()
+
     init {
         loadData()
     }
@@ -68,7 +72,9 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
         val filtered = if (categoryName == "Новинки") {
             allProducts.filter { it.tags.contains("New") }
         } else {
-            val categoryId = repository.loadCategories().find { it.name == categoryName }?.id
+            //Он ↓ вернётся... Возможно
+            //val categoryId = repository.loadCategories().find { it.name == categoryName }?.id
+            val categoryId = categoryIdMap[categoryName]
             allProducts.filter { it.categoryId == categoryId }
         }
         println("DEBUG: отфильтровано товаров = ${filtered.size} для категории $categoryName")
