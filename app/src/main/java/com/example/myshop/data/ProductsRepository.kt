@@ -1,6 +1,8 @@
 package com.example.myshop.data
 
 import android.content.Context
+import com.example.myshop.model.Category   // ← добавить
+import com.example.myshop.model.Product   // ← добавить
 
 class ProductsRepository(private val context: Context) {
 
@@ -8,7 +10,6 @@ class ProductsRepository(private val context: Context) {
         private const val TOKEN = "Bearer Cmt7wdwFgDIi1_SRX8hlJIExs0jJKPr4axflLpExAxM"
     }
 
-    // Исключения НЕ перехватываются — они идут в ViewModel
     suspend fun loadCatalog(): CatalogResponse {
         return RetrofitClient.apiService.getCatalog(TOKEN)
     }
