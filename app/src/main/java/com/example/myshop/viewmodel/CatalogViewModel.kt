@@ -16,9 +16,6 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-    private val _products = MutableLiveData<List<Product>>()
-    val products: LiveData<List<Product>> = _products
-
     private val _categories = MutableLiveData<List<String>>()
     val categories: LiveData<List<String>> = _categories
 
@@ -29,10 +26,8 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
     val filteredProducts: LiveData<List<Product>> = _filteredProducts
 
     private var allProducts = listOf<Product>()
-
-//    Существование этих двух ↓ сомнительно
-    private var categoryIdMap = mapOf<String, String>()
     private var allCategoryNames = listOf<String>()
+    private var categoryIdMap = mapOf<String, String>()
 
     init {
         loadData()
@@ -43,16 +38,20 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
         _errorMessage.value = null
         viewModelScope.launch {
             try {
-                val productsList = repository.loadProducts()
-                allProducts = productsList
+                // ОДИН ЗАПРОС к API
+                val catalog = repository.loadCatalog()
 
-                val categoriesList = repository.loadCategories()
-                categoryIdMap = categoriesList.associate { it.name to it.id }
-                allCategoryNames = listOf("Новинки") + categoriesList.map { it.name }
+                // Сохраняем товары
+                allProducts = catalog.items
+
+                // Сохраняем категории
+                categoryIdMap = catalog.categories.associate { it.name to it.id }
+                allCategoryNames = listOf("Новинки") + catalog.categories.map { it.name }
                 _categories.value = allCategoryNames
 
                 _selectedCategory.value = allCategoryNames[0]
                 filterProducts(allCategoryNames[0])
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 _errorMessage.value = "Ошибка загрузки данных. Проверьте интернет."
@@ -64,6 +63,7 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
     }
 
     fun selectCategory(categoryName: String) {
+        if (_selectedCategory.value == categoryName) return
         _selectedCategory.value = categoryName
         filterProducts(categoryName)
     }
@@ -72,14 +72,12 @@ class CatalogViewModel(private val repository: ProductsRepository) : ViewModel()
         val filtered = if (categoryName == "Новинки") {
             allProducts.filter { it.tags.contains("New") }
         } else {
-            //Он ↓ вернётся... Возможно
-            //val categoryId = repository.loadCategories().find { it.name == categoryName }?.id
             val categoryId = categoryIdMap[categoryName]
             allProducts.filter { it.categoryId == categoryId }
         }
-        println("DEBUG: отфильтровано товаров = ${filtered.size} для категории $categoryName")
         _filteredProducts.value = filtered
     }
+
     fun retryLoad() {
         loadData()
     }

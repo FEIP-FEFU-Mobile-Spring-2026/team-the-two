@@ -10,23 +10,22 @@ class ProductsRepository(private val context: Context) {
         private const val TOKEN = "Bearer Cmt7wdwFgDIi1_SRX8hlJIExs0jJKPr4axflLpExAxM"
     }
 
-    suspend fun loadCategories(): List<Category> {
+    // Единый метод для загрузки всего каталога
+    suspend fun loadCatalog(): CatalogResponse {
         return try {
-            val response = RetrofitClient.apiService.getCatalog(TOKEN)
-            response.categories
+            RetrofitClient.apiService.getCatalog(TOKEN)
         } catch (e: Exception) {
             e.printStackTrace()
-            emptyList()
+            CatalogResponse(emptyList(), emptyList())
         }
     }
 
+    // Для обратной совместимости с ViewModel
+    suspend fun loadCategories(): List<Category> {
+        return loadCatalog().categories
+    }
+
     suspend fun loadProducts(): List<Product> {
-        return try {
-            val response = RetrofitClient.apiService.getCatalog(TOKEN)
-            response.items
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emptyList()
-        }
+        return loadCatalog().items
     }
 }
