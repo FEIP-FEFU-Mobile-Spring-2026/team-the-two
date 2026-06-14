@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Кнопка удаления -->
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <!-- Фото товара -->
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop" />
+
+        <!-- Название товара -->
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/productImage"
+            android:layout_toStartOf="@id/deleteButton"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="2" />
+
+        <!-- Размер товара -->
+        <TextView
+            android:id="@+id/productSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productName"
+            android:layout_toEndOf="@id/productImage"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:textSize="13sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Цена товара -->
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productSize"
+            android:layout_toEndOf="@id/productImage"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="17dp"
+            android:textSize="17sp"
+            android:textColor="@android:color/holo_blue_dark" />
+
+        <!-- Кнопки +/− и количество -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productSize"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@android:color/darker_gray" >
+
+            <!-- Иконки минуса нет, можно обе иконки реализовать через формы с бэкграундом илии типо того-->
+            <ImageButton
+                android:id="@+id/decreaseButton"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/ic_menu_minus"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <TextView
+                android:id="@+id/quantityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="17sp"
+                android:paddingStart="22.5dp"
+                android:paddingEnd="22.5dp" />
+
+            <ImageButton
+                android:id="@+id/increaseButton"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/ic_menu_add"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
