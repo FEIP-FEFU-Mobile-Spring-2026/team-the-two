@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myshop.data.CartRepository
 import com.example.myshop.data.ProductsRepository
 import com.example.myshop.ui.CatalogAdapter
+import com.example.myshop.viewmodel.CartViewModel
 import com.example.myshop.viewmodel.CatalogViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +23,7 @@ import com.google.android.material.tabs.TabLayout
 class CatalogActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CatalogViewModel
+    private lateinit var cartViewModel: CartViewModel
     private lateinit var adapter: CatalogAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var tabLayout: TabLayout
@@ -45,7 +48,7 @@ class CatalogActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         mainContent = findViewById(R.id.mainContent)
 
-        // Инициализация репозитория и ViewModel
+        // Инициализация репозиториев и ViewModel
         val repository = ProductsRepository(this)
         viewModel = ViewModelProvider(
             this,
@@ -56,6 +59,9 @@ class CatalogActivity : AppCompatActivity() {
                 }
             }
         ).get(CatalogViewModel::class.java)
+
+        val cartRepository = CartRepository(this)
+        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
 
         // Настройка списка (RecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -123,6 +129,20 @@ class CatalogActivity : AppCompatActivity() {
             mainContent.visibility = View.VISIBLE
             progressBar.visibility = View.VISIBLE
             viewModel.retryLoad()
+        }
+
+        // ==================== БЕЙДЖ НА КОРЗИНЕ ====================
+        val menuItem = bottomNavigation.menu.findItem(R.id.nav_cart)
+        val badge = bottomNavigation.getOrCreateBadge(menuItem.itemId)
+        badge.isVisible = false
+
+        cartViewModel.itemsCount.observe(this) { count ->
+            if (count > 0) {
+                badge.isVisible = true
+                badge.number = count
+            } else {
+                badge.isVisible = false
+            }
         }
     }
 }
