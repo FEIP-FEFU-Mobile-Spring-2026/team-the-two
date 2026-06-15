@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">fefu2026spring.deploy.feip.dev</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+            <certificates src="@raw/fefu2026spring_deploy_feip_dev" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

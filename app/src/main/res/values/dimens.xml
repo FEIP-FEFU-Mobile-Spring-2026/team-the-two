@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="product_name_size">24sp</dimen>
+    <!--    Взял размер шрифта текста цены из окна каталога макета-->
+    <!--    в окне Bottom Sheet не оказалось цены отдельно от текста кнопки "Купить"-->
+    <dimen name="product_price_size">15sp</dimen>
+    <!--    Пока что будет пустовать. Но только пока-->
+    <dimen name="section_title_size"></dimen>
+    <dimen name="description_size">17sp</dimen>
+    <dimen name="button_height">48sp</dimen>
+</resources>

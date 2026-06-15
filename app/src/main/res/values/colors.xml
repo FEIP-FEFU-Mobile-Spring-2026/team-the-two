@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bottom_sheet_bg">#FFFFFF</color>
+<!--    Взял цвет цены из окна каталога макета-->
+<!--    в окне Bottom Sheet не оказалось цены отдельно от текста кнопки "Купить"-->
+    <color name="price_color">#623A29</color>
+    <color name="button_bg">#A47764</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="size_button_bg">#F6F6F6</color>
+    <color name="size_button_selected_bg">#623A29</color>
+    <color name="size_button_text">#1A1A1A</color>
+    <color name="size_button_selected_text">#FFFFFF</color>
+    <color name="chip_bg">#A47764</color>
+<!--    В макете не оказалось обводки метки, закрасил цветом заливки-->
+    <color name="chip_stroke">#A47764</color>
+    <color name="chip_text">#FFFFFF</color>
 </resources>
