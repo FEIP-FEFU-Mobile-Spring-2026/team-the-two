@@ -4,23 +4,8 @@
     <!--    Взял размер шрифта текста цены из окна каталога макета-->
     <!--    в окне Bottom Sheet не оказалось цены отдельно от текста кнопки "Купить"-->
     <dimen name="product_price_size">15sp</dimen>
-    <!--    Так и не понял, что такое section title...-->
-    <dimen name="section_title_size">16sp</dimen>
+    <!--    Пока что будет пустовать. Но только пока-->
+    <dimen name="section_title_size"></dimen>
     <dimen name="description_size">17sp</dimen>
     <dimen name="button_height">48sp</dimen>
-
-    <dimen name="cart_item_margin">8dp</dimen>
-    <dimen name="cart_item_padding">16dp</dimen>
-    <dimen name="cart_item_corner_radius">16dp</dimen>
-    <dimen name="cart_image_size">80dp</dimen>
-    <dimen name="cart_icon_size">17dp</dimen>
-    <dimen name="cart_button_height">40dp</dimen>
-    <dimen name="cart_comment_min_height">104dp</dimen>
-    <dimen name="cart_comment_margin">10dp</dimen>
-    <dimen name="cart_comment_padding">16dp</dimen>
-    <dimen name="cart_product_name_size">18dp</dimen>
-    <dimen name="cart_product_price_size">17dp</dimen>
-    <dimen name="cart_total_price_size">20dp</dimen>
-    <dimen name="cart_empty_text_size">20dp</dimen>
-
 </resources>
