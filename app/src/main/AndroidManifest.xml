@@ -26,8 +26,8 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <activity android:name=".OrderSuccessActivity" />
         </activity>
+        <activity android:name=".OrderSuccessActivity" />
         <activity android:name=".CartActivity" />
 
     </application>

@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="@dimen/cart_item_corner_radius">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="@dimen/cart_item_padding"
+        android:tint="@color/cart_delete_icon_color">
 
         <!-- Кнопка удаления -->
         <ImageButton
@@ -25,8 +26,8 @@
         <!-- Фото товара -->
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/cart_image_size"
+            android:layout_height="@dimen/cart_image_size"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
@@ -39,7 +40,7 @@
             android:layout_toEndOf="@id/productImage"
             android:layout_toStartOf="@id/deleteButton"
             android:layout_marginStart="20dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/cart_product_name_size"
             android:textStyle="bold"
             android:maxLines="2" />
 
@@ -64,8 +65,8 @@
             android:layout_toEndOf="@id/productImage"
             android:layout_marginStart="20dp"
             android:layout_marginTop="17dp"
-            android:textSize="17sp"
-            android:textColor="@android:color/holo_blue_dark" />
+            android:textSize="@dimen/cart_product_price_size"
+            android:textColor="@color/cart_price_color" />
 
         <!-- Кнопки +/− и количество -->
         <LinearLayout
@@ -81,8 +82,8 @@
             <!-- Иконки минуса нет, можно обе иконки реализовать через формы с бэкграундом илии типо того-->
             <ImageButton
                 android:id="@+id/decreaseButton"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="@dimen/cart_icon_size"
+                android:layout_height="@dimen/cart_icon_size"
                 android:src="@android:drawable/ic_menu_minus"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
@@ -97,8 +98,8 @@
 
             <ImageButton
                 android:id="@+id/increaseButton"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="@dimen/cart_icon_size"
+                android:layout_height="@dimen/cart_icon_size"
                 android:src="@android:drawable/ic_menu_add"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 

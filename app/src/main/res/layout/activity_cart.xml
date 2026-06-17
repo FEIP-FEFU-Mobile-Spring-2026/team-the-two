@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/cart_item_bg">
 
     <!-- Список товаров -->
     <androidx.recyclerview.widget.RecyclerView
@@ -22,17 +24,18 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@android:drawable/ic_menu_delete"/>
+            android:layout_width="@dimen/cart_image_size"
+            android:layout_height="@dimen/cart_image_size"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="@color/cart_empty_text" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Корзина пуста"
-            android:textSize="20sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textSize="@dimen/cart_empty_text_size"
+            android:textColor="@color/cart_empty_text" />
 
     </LinearLayout>
 
@@ -40,7 +43,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="11dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/cart_divider" />
 
     <!-- Контейнер формы -->
     <LinearLayout
@@ -61,7 +64,7 @@
             android:textSize="17sp"
             android:inputType="text"
             android:textColor="@android:color/darker_gray"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/cart_comment_bg"/>
 
         <!-- Email пользователя -->
         <EditText
@@ -69,29 +72,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="17dp"
+            android:paddingHorizontal="@dimen/cart_item_padding"
+            android:paddingVertical="@dimen/cart_item_padding"
             android:hint="Почта"
-            android:textSize="17sp"
+            android:textSize="@dimen/cart_product_price_size"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/darker_gray"
-            android:background="@android:color/darker_gray"/>
+            android:textColor="@color/cart_empty_text"
+            android:background="@color/cart_comment_bg"/>
 
         <!-- Поле комментария к заказу -->
         <EditText
             android:id="@+id/orderComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="104dp"
-            android:layout_marginTop="12dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="17dp"
+            android:minHeight="@dimen/cart_comment_min_height"
+            android:layout_marginTop="@dimen/cart_comment_margin"
+            android:paddingHorizontal="@dimen/cart_comment_padding"
+            android:paddingVertical="@dimen/cart_comment_padding"
             android:gravity="top|start"
             android:hint="Комментарий к заказу"
             android:textSize="17sp"
             android:inputType="textMultiLine"
             android:textColor="@android:color/darker_gray"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/cart_comment_bg"/>
 
     </LinearLayout>
 
@@ -101,7 +104,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/darker_gray">
+        android:background="@color/cart_comment_bg">
 
         <!-- Итого и цена -->
         <LinearLayout
@@ -114,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Итого:"
-                android:textSize="20sp"
+                android:textSize="@dimen/cart_total_price_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -122,7 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ₽"
-                android:textSize="20sp"
+                android:textColor="@color/cart_total_price_color"
+                android:textSize="@dimen/cart_total_price_size"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -131,9 +135,10 @@
         <Button
             android:id="@+id/checkoutButton"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/cart_button_height"
             android:layout_weight="1"
             android:layout_marginTop="12dp"
+            android:backgroundTint="@color/cart_checkout_button_bg"
             android:text="Оформить"
             android:textSize="17sp"/>
 
@@ -141,9 +146,10 @@
         <Button
             android:id="@+id/clearCartButton"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/cart_button_height"
             android:layout_weight="1"
             android:layout_marginTop="12dp"
+            android:backgroundTint="@color/cart_clear_button_bg"
             android:text="Очистить корзину"
             android:textSize="17sp"/>
 
