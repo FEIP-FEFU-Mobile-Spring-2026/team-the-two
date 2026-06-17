@@ -84,7 +84,7 @@
                 android:id="@+id/decreaseButton"
                 android:layout_width="@dimen/cart_icon_size"
                 android:layout_height="@dimen/cart_icon_size"
-                android:src="@android:drawable/ic_menu_minus"
+                android:src="@drawable/minus"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
             <TextView
@@ -100,7 +100,7 @@
                 android:id="@+id/increaseButton"
                 android:layout_width="@dimen/cart_icon_size"
                 android:layout_height="@dimen/cart_icon_size"
-                android:src="@android:drawable/ic_menu_add"
+                android:src="@drawable/plus"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
         </LinearLayout>
