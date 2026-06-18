@@ -79,10 +79,16 @@ class CartActivity : AppCompatActivity() {
                 recyclerView.visibility = View.GONE
                 emptyCartContainer.visibility = View.VISIBLE
                 checkoutButton.isEnabled = false
+                checkoutButton.visibility = View.GONE
+                clearCartButton.isEnabled = false
+                clearCartButton.visibility = View.GONE
             } else {
                 recyclerView.visibility = View.VISIBLE
                 emptyCartContainer.visibility = View.GONE
                 checkoutButton.isEnabled = true
+                checkoutButton.visibility = View.VISIBLE
+                clearCartButton.isEnabled = true
+                clearCartButton.visibility = View.VISIBLE
             }
         }
 
