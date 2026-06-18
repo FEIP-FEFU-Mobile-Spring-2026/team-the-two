@@ -112,10 +112,12 @@ class CartActivity : AppCompatActivity() {
         checkoutButton.setOnClickListener {
             val comment = orderComment.text.toString()
             viewModel.setOrderComment(comment)
-            val intent = Intent(this, OrderSuccessActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, OrderSuccessActivity::class.java)
+//            startActivity(intent)
+            val successBottomSheet = OrderSuccessBottomSheet()
+            successBottomSheet.onDismissListener = { finish() }
+            successBottomSheet.show(supportFragmentManager, "OrderSuccessBottomSheet")
             viewModel.clearCart()
-            finish()
         }
     }
 
