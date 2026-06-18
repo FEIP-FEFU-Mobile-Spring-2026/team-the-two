@@ -154,4 +154,9 @@ class CatalogActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        cartViewModel.loadCart()
+    }
 }
