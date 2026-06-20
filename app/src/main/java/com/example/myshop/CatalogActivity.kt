@@ -61,7 +61,8 @@ class CatalogActivity : AppCompatActivity() {
             }
         ).get(CatalogViewModel::class.java)
 
-        val cartRepository = CartRepository(this)
+        val productsRepository = ProductsRepository(this)
+        val cartRepository = CartRepository(this, productsRepository)
         cartViewModel = ViewModelProvider(
             this,
             object : ViewModelProvider.Factory{

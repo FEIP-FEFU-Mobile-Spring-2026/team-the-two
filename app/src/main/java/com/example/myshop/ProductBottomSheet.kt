@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.myshop.data.CartRepository
+import com.example.myshop.data.ProductsRepository
 import com.example.myshop.model.CartItem
 import com.example.myshop.model.Product
 import com.example.myshop.model.Size
@@ -51,7 +52,8 @@ class ProductBottomSheet : BottomSheetDialogFragment() {
         val product = arguments?.getSerializable(ARG_PRODUCT) as? Product ?: return
 
         // Инициализация ViewModel корзины
-        val cartRepository = CartRepository(requireContext())
+        val productsRepository = ProductsRepository(requireContext())
+        val cartRepository = CartRepository(requireContext(), productsRepository)
         val cartViewModel = ViewModelProvider(requireActivity()).get(CartViewModel::class.java)
 
         // Фото

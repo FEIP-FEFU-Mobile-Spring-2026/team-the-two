@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.data.CartRepository
+import com.example.myshop.data.ProductsRepository
 import com.example.myshop.ui.CartAdapter
 import com.example.myshop.viewmodel.CartViewModel
 
@@ -37,7 +38,8 @@ class CartActivity : AppCompatActivity() {
         supportActionBar?.title = "Корзина"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val repository = CartRepository(this)
+        var productsRepository = ProductsRepository(this)
+        val repository = CartRepository(this, productsRepository)
         viewModel = ViewModelProvider(
             this,
             object : ViewModelProvider.Factory{
