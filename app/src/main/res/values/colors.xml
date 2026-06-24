@@ -17,4 +17,14 @@
 <!--    В макете не оказалось обводки метки, закрасил цветом заливки-->
     <color name="chip_stroke">#A47764</color>
     <color name="chip_text">#FFFFFF</color>
+
+    <color name="cart_item_bg">#FFFFFF</color>
+    <color name="cart_price_color">#623A29</color>
+    <color name="cart_total_price_color">#1A1A1A</color>
+    <color name="cart_delete_icon_color">#C0C0C0</color>
+    <color name="cart_clear_button_bg">#C0C0C0</color>
+    <color name="cart_checkout_button_bg">#A47764</color>
+    <color name="cart_divider">#F6F6F6</color>
+    <color name="cart_empty_text">#1A1A1A</color>
+    <color name="cart_comment_bg">#F6F6F6</color>
 </resources>

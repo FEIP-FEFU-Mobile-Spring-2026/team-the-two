@@ -3,8 +3,10 @@ package com.example.myshop.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myshop.data.CartRepository
 import com.example.myshop.model.CartItem
+import kotlinx.coroutines.launch
 
 class CartViewModel(private val repository: CartRepository) : ViewModel() {
 
@@ -24,29 +26,39 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
     }
 
     fun loadCart() {
-        _cartItems.value = repository.getCartItems()
-        _totalPrice.value = repository.getTotalPrice()
-        _itemsCount.value = repository.getItemsCount()
+        viewModelScope.launch {
+            _cartItems.value = repository.getCartItems()
+            _totalPrice.value = repository.getTotalPrice()
+            _itemsCount.value = repository.getItemsCount()
+        }
     }
 
     fun addToCart(item: CartItem) {
-        repository.addItem(item)
-        loadCart()
+        viewModelScope.launch {
+            repository.addItem(item)
+            loadCart()
+        }
     }
 
     fun removeItem(productId: String, sizeId: String) {
-        repository.removeItem(productId, sizeId)
-        loadCart()
+        viewModelScope.launch {
+            repository.removeItem(productId, sizeId)
+            loadCart()
+        }
     }
 
     fun updateQuantity(productId: String, sizeId: String, quantity: Int) {
-        repository.updateQuantity(productId, sizeId, quantity)
-        loadCart()
+        viewModelScope.launch {
+            repository.updateQuantity(productId, sizeId, quantity)
+            loadCart()
+        }
     }
 
     fun clearCart() {
-        repository.clearCart()
-        loadCart()
+        viewModelScope.launch {
+            repository.clearCart()
+            loadCart()
+        }
     }
 
     fun setOrderComment(comment: String) {

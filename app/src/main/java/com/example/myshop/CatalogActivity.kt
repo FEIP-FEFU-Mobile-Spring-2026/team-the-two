@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,8 +61,17 @@ class CatalogActivity : AppCompatActivity() {
             }
         ).get(CatalogViewModel::class.java)
 
-        val cartRepository = CartRepository(this)
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        val productsRepository = ProductsRepository(this)
+        val cartRepository = CartRepository(this, productsRepository)
+        cartViewModel = ViewModelProvider(
+            this,
+            object : ViewModelProvider.Factory{
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return CartViewModel(cartRepository) as T
+                }
+            }
+        ).get(CartViewModel::class.java)
 
         // Настройка списка (RecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -144,5 +154,10 @@ class CatalogActivity : AppCompatActivity() {
                 badge.isVisible = false
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cartViewModel.loadCart()
     }
 }

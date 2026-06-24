@@ -10,10 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.data.CartRepository
+import com.example.myshop.data.ProductsRepository
 import com.example.myshop.ui.CartAdapter
 import com.example.myshop.viewmodel.CartViewModel
 
@@ -36,8 +38,18 @@ class CartActivity : AppCompatActivity() {
         supportActionBar?.title = "Корзина"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val repository = CartRepository(this)
-        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        var productsRepository = ProductsRepository(this)
+        val repository = CartRepository(this, productsRepository)
+        viewModel = ViewModelProvider(
+            this,
+            object : ViewModelProvider.Factory{
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return CartViewModel(repository) as T
+                }
+            }
+        ).get(CartViewModel::class.java)
+
         viewModel.loadCart()
 
         recyclerView = findViewById(R.id.cartRecyclerView)
@@ -69,10 +81,16 @@ class CartActivity : AppCompatActivity() {
                 recyclerView.visibility = View.GONE
                 emptyCartContainer.visibility = View.VISIBLE
                 checkoutButton.isEnabled = false
+                checkoutButton.visibility = View.GONE
+                clearCartButton.isEnabled = false
+                clearCartButton.visibility = View.GONE
             } else {
                 recyclerView.visibility = View.VISIBLE
                 emptyCartContainer.visibility = View.GONE
                 checkoutButton.isEnabled = true
+                checkoutButton.visibility = View.VISIBLE
+                clearCartButton.isEnabled = true
+                clearCartButton.visibility = View.VISIBLE
             }
         }
 
@@ -96,10 +114,12 @@ class CartActivity : AppCompatActivity() {
         checkoutButton.setOnClickListener {
             val comment = orderComment.text.toString()
             viewModel.setOrderComment(comment)
-            val intent = Intent(this, OrderSuccessActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, OrderSuccessActivity::class.java)
+//            startActivity(intent)
+            val successBottomSheet = OrderSuccessBottomSheet()
+            successBottomSheet.onDismissListener = { finish() }
+            successBottomSheet.show(supportFragmentManager, "OrderSuccessBottomSheet")
             viewModel.clearCart()
-            finish()
         }
     }
 
