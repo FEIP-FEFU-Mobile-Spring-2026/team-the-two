@@ -38,6 +38,7 @@
 1. Клонировать репозиторий:
    ```bash
    git clone https://github.com/FEIP-FEFU-Mobile-Spring-2026/team-the-two.git
+   ```
 2. Открыть Android Studio и добавить проект из клонированной папки 
 3. Дождаться успешной синхронизации Gradle
 4. В панели инструментов нажать на Build, в контекстном меню выбрать Generate App Bundles or APKs, далее Generate APKs
